@@ -1,0 +1,103 @@
+/* header {
+  background-color: #00c3ff;
+  color: hsl(208, 97%, 50%);
+  padding: 10px;
+  width: 100%;
+  position: fixed;
+  font-family: Arial, sans-serif;
+  text-align: right;
+  top: 0;
+  left: 0;
+  z-index: 999; 
+
+}
+
+nav ul {
+  
+  list-style-type: none;
+  margin: 60;
+  padding: 60; 
+  
+ 
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+nav li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+#logo{
+  max-width: 100%;
+  top: 10;
+  left: 10;
+  object-fit: cover;
+  border-radius: 80%;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+
+} */
+
+
+.container {
+  margin: 0 auto;
+  max-width: 800px;
+  margin-down: 70px;
+}
+
+header {
+  background-color: #00c3ff;
+  color: hsl(208, 97%, 50%);
+  padding: 10px;
+  width: 100%;
+  position: fixed;
+  font-family: Arial, sans-serif;
+  text-align: right;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 60;
+  padding: 60;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+nav li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+#logo {
+  max-width: 100%;
+  top: 10;
+  left: 10;
+  object-fit: cover;
+  border-radius: 80%;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+}
+.ScheduleCalendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

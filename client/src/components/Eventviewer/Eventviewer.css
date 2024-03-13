@@ -1,0 +1,79 @@
+/* EventViewer.css */
+
+.eventviewer {
+    font-family: 'Arial', sans-serif;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: hwb(0 92% 7%);
+    position: fixed;
+    margin-left: 580px;
+  }
+  
+  .eventviewer h1 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .eventviewer label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .eventviewer input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .eventviewer button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .eventviewer button:hover {
+    background-color: #45a049;
+  }
+  
+  .eventviewer ul {
+    list-style: none;
+    padding: 0;
+    max-height: 300px; /* Set a maximum height for the list */
+    overflow-y: auto; /* Enable vertical scrollbar if the list exceeds the max height */
+    margin-top: 20px;
+  }
+  
+  .eventviewer li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .eventviewer li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .event-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .event-details div {
+    flex: 1;
+  }
+  
+  .event-details span {
+    color: #777;
+  }
+  
