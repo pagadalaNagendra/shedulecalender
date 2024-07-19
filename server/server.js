@@ -9,7 +9,7 @@ const nodemailer = require("nodemailer");
 mongoose.set("strictQuery", false);
 const app = express();
 
-mongoose.connect("mongodb://127.0.0.1:27017/Scb", {
+mongoose.connect("mongodb+srv://pagadalanagendra2003:nQuHSG2EJDD7xQ1d@calender.mjpspf3.mongodb.net/", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
