@@ -12,14 +12,14 @@ const admin = require('firebase-admin');
 mongoose.set("strictQuery", false);
 const app = express();
 
-var serviceAccount = require("C:/Users/NAGENDRA/Desktop/calenderfinalupdate22/server/rcts-cf4e0-firebase-adminsdk-6yzrl-d80982fbf5.json");
+
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/rcts", {
+mongoose.connect("mongodb+srv://pagadalanagendra2003:nQuHSG2EJDD7xQ1d@calender.mjpspf3.mongodb.net/", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -141,13 +141,13 @@ app.post("/sendMail", async(req,res)=>{
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "durgabhavanigunnam0@gmail.com", 
-      pass: "wdcz kebh ooaf hzxr",
+      user: "pagadalanagendra2003@gmail.com", 
+      pass: "sbqn aztv cezy vacl",
     },
   });
   
     const mailOptions = {
-      from: "durgabhavanigunnam0@gmail.com", 
+      from: "pagadalanagendra2003@gmail.com", 
       to: emails, 
       subject: `${title} EVENT ADDED TO THE CALENDER..`, 
       text: `Your ${title} event on ${start}, ${eventTime} is added to the calender. 
