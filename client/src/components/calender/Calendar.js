@@ -16,7 +16,7 @@ function ScheduleCalendar() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get("http://localhost:2500/calendarschema");
+        const response = await axios.get("https://shedulecalender.onrender.com/calendarschema");
         const calendarEvents = response.data.map((event) => {
           return {
             title: event.title,
@@ -106,13 +106,13 @@ function ScheduleCalendar() {
             eventTime,
           };
 
-          axios.post("http://localhost:2500/sendMail",newEvent)
+          axios.post("https://shedulecalender.onrender.com/sendMail",newEvent)
           .then(response=>{
             console.log(response)
           })
           // console.log(sendMail)
           axios
-            .post("http://localhost:2500/calendarschema", newEvent)
+            .post("https://shedulecalender.onrender.com/calendarschema", newEvent)
             .then((response) => {
               const updatedEvents = [...events, { ...newEvent, id: response.data._id }];
               setEvents(updatedEvents);
@@ -139,7 +139,7 @@ function ScheduleCalendar() {
       cancelButtonText: "No, keep it",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:2500/calendarschema/${clickInfo.event.id}`).then(() => {
+        axios.delete(`https://shedulecalender.onrender.com/calendarschema/${clickInfo.event.id}`).then(() => {
           const filteredEvents = events.filter((event) => event.id !== clickInfo.event.id);
           setEvents(filteredEvents);
         });
@@ -154,7 +154,7 @@ function ScheduleCalendar() {
       start: updateInfo.start,
       end: updateInfo.end,
     };
-    axios.put(`http://localhost:2500/calendarschema/${event.id}`, updatedEvent).then(() => {
+    axios.put(`https://shedulecalender.onrender.com/calendarschema/${event.id}`, updatedEvent).then(() => {
       calendarApi.getApi().updateEvent(updatedEvent);
     });
   }
