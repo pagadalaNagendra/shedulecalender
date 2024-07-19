@@ -5,16 +5,11 @@ const jwt = require("jsonwebtoken");
 const middleware = require("./middleware");
 const Calender = require("./calendarschema");
 const nodemailer = require("nodemailer");
-const bodyParser = require("body-parser");
-const { spawn } = require("child_process");
-
 
 mongoose.set("strictQuery", false);
 const app = express();
 
-
-
-mongoose.connect("mongodb+srv://pagadalanagendra2003:nQuHSG2EJDD7xQ1d@calender.mjpspf3.mongodb.net/", {
+mongoose.connect("mongodb://127.0.0.1:27017/Scb", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -27,14 +22,24 @@ db.once("open", () => {
 
 app.use(express.json());
 app.use(cors({ origin: "*" }));
+
+app.get("/", (req, res) => {
+  return res.send("<h1>COORDINATOR DASHBOARD</h1>");
+});
+
+
+
 app.post("/calendarschema", async (req, res) => {
   try {
     const { title, emails, start, end, alertTime, eventTime } = req.body;
     console.log(req.body)
+
+    // Convert emails to an array if it's a string
     const emailsArray = typeof emails === 'string' ? emails.split(",") : emails;
 
     console.log("Parsed emailsArray:", emailsArray);
 
+    // Combine date and time into the start and end fields
     const startTime = new Date(start);
     console.log(startTime)
     startTime.setHours(eventTime.split(":")[0]);
@@ -49,6 +54,7 @@ app.post("/calendarschema", async (req, res) => {
       emails: emailsArray,
       start: startTime,
       end: endTime,
+      // eventTime,
       alertTime:eventTime, // Default to 0 if not provided
     });
 
@@ -60,6 +66,11 @@ app.post("/calendarschema", async (req, res) => {
     return res.status(500).send("Server Error");
   }
 });
+
+
+// ... (rest of the code remains the same)
+
+
 
 app.get("/calendarschema", async (req, res) => {
   try {
@@ -73,8 +84,9 @@ app.get("/calendarschema", async (req, res) => {
 
 app.get("/eventtimes", async (req, res) => {
   try {
+    // const calendarschema = await Calender.find().sort({ start: 1 });
     const calendarschema = await Calender.find({}, { alertTime: 1, title: 1,start:1,emails:1, _id: 0 }).sort({ start: 1 });
- 
+    // console.log(calendarschema)
     return res.status(200).json(calendarschema);
   } catch (err) {
     console.error(err);
@@ -83,23 +95,6 @@ app.get("/eventtimes", async (req, res) => {
 });
 
 
-app.get("/eventtimesofDay", async (req, res) => {
-  const date = req.query.date;
-  console.log(req.query.date);
-
-  try {
-    const escapedDate = date.replace(/[-////^$*+?.()|[/]{}]/g, '//$&');
-    const calendarschema = await Calender.find(
-      { start: { $regex: `^${escapedDate}`, $options: 'i' } },
-      { alertTime: 1, title: 1, start: 1, emails: 1, _id: 0 }
-    ).sort({ start: 1 });
-    console.log(calendarschema);
-    return res.status(200).json(calendarschema);
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send("Server Error");
-  }
-});
 app.put("/calendarschema/:id", async (req, res) => {
   try {
     const { title, emails, start, end } = req.body;
@@ -131,81 +126,35 @@ app.delete("/calendarschema/:id", async (req, res) => {
   }
 });
 
-app.post("/sendMail", async(req,res)=>{
-  const {title,emails,start,eventTime} = req.body
+app.post("/sendMail", async (req, res) => {
+  const { title, emails, start, eventTime } = req.body;
+
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "pagadalanagendra2003@gmail.com", 
-      pass: "sbqn aztv cezy vacl",
+      user: "pagadalanagendra2003@gmail.com", // replace with your Gmail email
+      pass: "sbqn aztv cezy vacl", // replace with your Gmail password
     },
   });
-  
-    const mailOptions = {
-      from: "pagadalanagendra2003@gmail.com", 
-      to: emails, 
-      subject: `${title} EVENT ADDED TO THE CALENDER..`, 
-      text: `Your ${title} event on ${start}, ${eventTime} is added to the calender. 
-Thank You..!`, 
-      
-    };
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error("Error sending email:", error);
-      } else {
-        console.log("Email sent:", info.response);
-      }
-    });
-  
-    res.send("success") 
-})
 
-function sendPushNotification(title, body, tokens) {
-  const message = {
-    notification: {
-      title: title,
-      body: body,
-    },
-    tokens: tokens,
+  const mailOptions = {
+    from: "pagadalanagendra2003@gmail.com", // sender address
+    to: emails, // list of receivers
+    subject: `${title} EVENT ADDED TO THE CALENDER..`, // Subject line
+    text: `Your ${title} event on ${start}, ${eventTime} is added to the calender. 
+Thank You..!`, // plain text body
   };
 
-  admin.messaging().sendMulticast(message)
-    .then((response) => {
-      const results = response.responses;
-
-      results.forEach((result, index) => {
-        if (!result.success) {
-          const error = result.error;
-          console.error(`Failed to send notification to ${tokens[index]}:`, error);
-        }
-      });
-
-      console.log('Successfully sent messages:', results);
-    })
-    .catch((error) => {
-      console.error('Error sending message:', error);
-    });
-}
-
-setInterval(async () => {
-  const now = new Date();
-  const upcomingEvents = await Calender.find({ 
-    start: { $gt: now }, 
-    // Ensure you have an appropriate index for efficiency
-  });
-
-  upcomingEvents.forEach(event => {
-    const eventTime = new Date(event.start).getTime();
-    const currentTime = now.getTime();
-    const timeUntilEvent = eventTime - currentTime;
-
-    // Adjust this check as necessary for your use case
-    if (timeUntilEvent <= 60000) { // 1 minute before event starts
-      // Assuming event.emails is an array of tokens; adjust as necessary
-      sendPushNotification(event.title, "Event is starting soon", event.emails);
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Error sending email:", error);
+      return res.status(500).send("Error sending email");
+    } else {
+      console.log("Email sent:", info.response);
+      return res.send("success");
     }
   });
-}, 60000); // Check every minute
+});
 
 
 app.listen(2500, () => {
