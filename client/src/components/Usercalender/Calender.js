@@ -47,7 +47,7 @@ function ScheduleCalendar() {
   }
 
   const haha = async () => {
-    const eventTimesResponse = await axios.get("http://localhost:2500/eventtimes");
+    const eventTimesResponse = await axios.get("https://shedulecalender.onrender.com/eventtimes");
     const eventTimes = eventTimesResponse.data;
     console.log(eventTimes);
     const futureEvents = getFutureEvents(eventTimes);
@@ -81,7 +81,7 @@ function ScheduleCalendar() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get("http://localhost:2500/calendarschema");
+        const response = await axios.get("https://shedulecalender.onrender.com/calendarschema");
         const calendarEvents = response.data.map((event) => {
           return {
             title: event.title,
@@ -104,7 +104,7 @@ function ScheduleCalendar() {
 
   async function checkUpcomingEvents() {
     try {
-      const eventTimesResponse = await axios.get("http://localhost:2500/eventtimes");
+      const eventTimesResponse = await axios.get("https://shedulecalender.onrender.com/eventtimes");
       const eventTimes = eventTimesResponse.data;
       const now = new Date();
       const current_hours = now.getHours();
@@ -137,7 +137,7 @@ function ScheduleCalendar() {
 
   async function checkUpcomingEvents() {
     try {
-      const eventTimesResponse = await axios.get("http://localhost:2500/eventtimes");
+      const eventTimesResponse = await axios.get("https://shedulecalender.onrender.com/eventtimes");
       const eventTimes = eventTimesResponse.data;
       const now = new Date();
       const current_hours = now.getHours();
@@ -191,7 +191,7 @@ function ScheduleCalendar() {
         emails: event.emails,
       };
 
-      const sendMail = await axios.post("http://localhost:2500/sendMail", mails);
+      const sendMail = await axios.post("https://shedulecalender.onrender.com/sendMail", mails);
       console.log(sendMail);
     }
   }
