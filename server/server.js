@@ -7,16 +7,11 @@ const Calender = require("./calendarschema");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const { spawn } = require("child_process");
-const admin = require('firebase-admin');
+
 
 mongoose.set("strictQuery", false);
 const app = express();
 
-
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
 
 
 mongoose.connect("mongodb+srv://pagadalanagendra2003:nQuHSG2EJDD7xQ1d@calender.mjpspf3.mongodb.net/", {
