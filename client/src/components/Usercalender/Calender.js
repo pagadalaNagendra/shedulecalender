@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 // Import specific modules from firebase
 // import firebase from 'firebase/app';
 import addNotification from 'react-push-notification';
-import 'firebase/messaging';
+
 import "./Calender.css";
 
 function ScheduleCalendar() {
