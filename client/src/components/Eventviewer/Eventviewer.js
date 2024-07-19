@@ -28,7 +28,7 @@ const EventViewer = () => {
   const getEvents = async () => {
     try {
       const theDate = formatDate(selectedDate)
-      const response = await fetch(`http://localhost:2500/eventtimesofDay?date=${theDate}`);
+      const response = await fetch(`https://shedulecalender.onrender.com/eventtimesofDay?date=${theDate}`);
       if (response.ok) {
         try {
           const eventsData = await response.json();
