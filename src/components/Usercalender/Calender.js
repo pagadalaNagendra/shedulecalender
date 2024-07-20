@@ -5,6 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import axios from "axios";
 import Swal from "sweetalert2";
+// import sendNotifications from "sendNotifications"
 // Import specific modules from firebase
 // import firebase from 'firebase/app';
 
@@ -153,23 +154,23 @@ function ScheduleCalendar() {
         const timeDifference = totalSeconds - current_totalSeconds;
         const eventDate = event.start.slice(0, 16);
   
-        if (timeDifference === 0 && eventDate === today) {
-          checkAlertTiming(event, timeDifference, "event started");
-          // Call sendNotifications for immediate notifications
-          sendNotifications(event);
-        } else if (timeDifference === 15 * 60 && eventDate === today) {
-          checkAlertTiming(event, timeDifference, "event will start in 15min");
-          // Call sendNotifications for 15-minute notifications
-          sendNotifications(event);
-        } else if (timeDifference === 30 * 60 && eventDate === today) {
-          checkAlertTiming(event, timeDifference, "event will start in 30min");
-          // Call sendNotifications for 30-minute notifications
-          sendNotifications(event);
-        } else if (timeDifference === 60 * 60 && eventDate === today) {
-          checkAlertTiming(event, timeDifference, "event will start in 60min");
-          // Call sendNotifications for 60-minute notifications
-          sendNotifications(event);
-        }
+        // if (timeDifference === 0 && eventDate === today) {
+        //   checkAlertTiming(event, timeDifference, "event started");
+        //   // Call sendNotifications for immediate notifications
+        //   sendNotifications(event);
+        // } else if (timeDifference === 15 * 60 && eventDate === today) {
+        //   checkAlertTiming(event, timeDifference, "event will start in 15min");
+        //   // Call sendNotifications for 15-minute notifications
+        //   sendNotifications(event);
+        // } else if (timeDifference === 30 * 60 && eventDate === today) {
+        //   checkAlertTiming(event, timeDifference, "event will start in 30min");
+        //   // Call sendNotifications for 30-minute notifications
+        //   sendNotifications(event);
+        // } else if (timeDifference === 60 * 60 && eventDate === today) {
+        //   checkAlertTiming(event, timeDifference, "event will start in 60min");
+        //   // Call sendNotifications for 60-minute notifications
+        //   sendNotifications(event);
+        // }
       });
     } catch (error) {
       console.error(error);
@@ -197,18 +198,13 @@ function ScheduleCalendar() {
   }
 
   function displayAlert(event, alertType) {
-    // Swal.fire({
-    //   title: `Event Alert - ${event.title} ${alertType} at ${event.alertTime}`,
-    //   text: `'${event.title}' ${alertType} `,
-    //   icon: "info",
-    //   confirmButtonText: "OK",
-    // });
-    addNotification({
-      title : event.title,
-      message: event.title,
-      duration:4000,
-      native:true
-    })
+    Swal.fire({
+      title: `Event Alert - ${event.title} ${alertType} at ${event.alertTime}`,
+      text: `'${event.title}' ${alertType} `,
+      icon: "info",
+      confirmButtonText: "OK",
+    });
+
   }
 
   function isValidEmail(emails) {
