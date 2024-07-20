@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/shedulecalender/static/css/main.6f6469ca.css",
-    "main.js": "/shedulecalender/static/js/main.808520a9.js",
-    "static/js/787.c4e7f8f9.chunk.js": "/shedulecalender/static/js/787.c4e7f8f9.chunk.js",
-    "index.html": "/shedulecalender/index.html",
-    "main.6f6469ca.css.map": "/shedulecalender/static/css/main.6f6469ca.css.map",
-    "main.808520a9.js.map": "/shedulecalender/static/js/main.808520a9.js.map",
-    "787.c4e7f8f9.chunk.js.map": "/shedulecalender/static/js/787.c4e7f8f9.chunk.js.map"
+    "main.css": "/shedulecalender/frontend/static/css/main.6f6469ca.css",
+    "main.js": "/shedulecalender/frontend/static/js/main.2c58823e.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/shedulecalender/frontend/static/js/787.c4e7f8f9.chunk.js",
+    "index.html": "/shedulecalender/frontend/index.html",
+    "main.6f6469ca.css.map": "/shedulecalender/frontend/static/css/main.6f6469ca.css.map",
+    "main.2c58823e.js.map": "/shedulecalender/frontend/static/js/main.2c58823e.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/shedulecalender/frontend/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6f6469ca.css",
-    "static/js/main.808520a9.js"
+    "static/js/main.2c58823e.js"
   ]
 }
